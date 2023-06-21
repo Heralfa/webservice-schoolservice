@@ -18,7 +18,7 @@ switch ($_GET["option"]) {
         break;
 
     case "agregarUsuario";
-        $datos = $modelos->agregarUsuario($body['usuario_u'], $body['nombres_u'], $body['apellidos_u'], $body['email_u'], $body['pass']);
+        $datos = $modelos->agregarUsuario($body['nombres'],$body['apellidoM'],$body['apellidoP'],$body['rfc'],$body['correo'],$body['pass'],$body['carrera']);
         echo json_encode($datos);
         break;
     case "traerUsuario";

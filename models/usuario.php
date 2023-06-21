@@ -35,17 +35,20 @@ class Usuario extends Conexion {
 
     }
 
-    public function agregarUsuario($usuario_u, $nombres_u, $apellidos_u, $email_u, $pass) {
+    public function agregarUsuario( $nombres, $apellidoP,$apellidoM, $rfc, $correo,$pass,$carrera) {
         $link = parent::connect();
         parent::set_names();
         $passencrypt = password_hash($pass, PASSWORD_DEFAULT);
-        $sql = "INSERT INTO usuario(`usuario_u`, `nombres_u`, `apellidos_u`, `email_u`, `pass`) VALUES (?,?,?,?,?);";
+        $sql = "INSERT INTO `usuarios`( `nombres`, `apellidoP`, `apellidoM`, `rfc`, `correo`, `pass`, `carrera` ) VALUES (?,?,?,?,?,?,?)";
         $sql = $link->prepare($sql);
-        $sql->bindValue(1, $usuario_u);
-        $sql->bindValue(2, $nombres_u);
-        $sql->bindValue(3, $apellidos_u);
-        $sql->bindValue(4, $email_u);
-        $sql->bindValue(5, $passencrypt);
+        $sql->bindValue(1, $nombres);
+        $sql->bindValue(2, $apellidoP);
+        $sql->bindValue(3, $apellidoM);
+        $sql->bindValue(4, $passencrypt);
+        $sql->bindValue(5, $correo);
+        $sql->bindValue(6, $rfc);
+        $sql->bindValue(7, $carrera);
+    
         $result['status'] = $sql->execute();
         return $result;
     }

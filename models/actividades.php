@@ -2,30 +2,38 @@
 require_once("../conexion.php");
 $data = json_decode(file_get_contents("php://input"), true);
 
-class Usuario extends Conexion {
+class Actividades extends Conexion {
     
-    function agregarSaldo($id_u, $saldo_u) {
+    function insertarTarea($titulo, $descripcion, $organizacion, $horaActividad,$vacantes,$horaInicio,
+    $fecha,$lugar,$estado) {
         $db = parent::connect();
         parent::set_names();
-        $sql = "UPDATE usuario SET saldo_u = saldo_u + ? WHERE id_u = ?;";
+        $sql = "INSERT INTO `usuarios`( `titulo`, `descripcion`, `organizacion`, `horasActividad`, `vacantes`, `horaInicio`, `fecha`, `lugar`, `estado`) VALUES (?,?,?,?,?,?,?,?,?,?)";
         $sql = $db->prepare($sql);
-        $sql->bindValue(1, $saldo_u);
-        $sql->bindValue(2, $id_u);
-        return $sql->execute();
+        $sql->bindValue(1, $titulo);
+        $sql->bindValue(2, $descripcion);
+        $sql->bindValue(3, $organizacion);
+        $sql->bindValue(4, $horaActividad);
+        $sql->bindValue(5, $vacantes);
+        $sql->bindValue(6, $horaInicio);
+        $sql->bindValue(7, $fecha);
+        $sql->bindValue(8, $lugar);
+        $sql->bindValue(9, $estado);
+        
+        $result['status'] = $sql->execute();
+        return $result;
     }
 
 
     public function login($correo,$pass){
         $db = parent::connect();
         parent::set_names();
-        $sql = "SELECT idUsuario, correo, pass,tipo FROM usuarios WHERE correo= ? AND pass = ?;";       
+        $sql = "SELECT idUsuario, correo, pass FROM usuarios WHERE correo= ? AND pass = ?;";       
          $sql = $db->prepare($sql);
         $sql->bindValue(1, $correo);
         $sql->bindValue(2, $pass);
-        // $sql->bindValue(3, $tipo);
         $sql->execute();
         $query = $sql->fetch();
-
         if ($pass = $query['pass']) {
             $result['idUsuario'] = $query['idUsuario'];
 
@@ -55,6 +63,7 @@ class Usuario extends Conexion {
         $result['status'] = $sql->execute();
         return $result;
     }
+ 
     function get_usuario() {
         $db = parent::connect();
         parent::set_names();
@@ -63,6 +72,7 @@ class Usuario extends Conexion {
         $sql->execute();
         return $sql->fetchAll(PDO::FETCH_OBJ);
     }
+
 
     function get_usuario_x_id($idUsuario) {
         $db = parent::connect();

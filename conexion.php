@@ -10,7 +10,7 @@ class Conexion
     protected function connect()
     {
         try {
-            $NAMEDB = 'schoolServiceDB';
+            $NAMEDB = 'schoolServicedb';
             $HOST = 'localhost';
             $USER = 'root';
             $PASSWORD = '';

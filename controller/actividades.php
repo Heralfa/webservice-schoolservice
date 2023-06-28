@@ -1,16 +1,17 @@
 <?php
-require_once("../models/usuario.php");
-$modelos = new Usuario();
+require_once("../models/actividades.php");
+$modelos = new Actividades();
 
 $body = json_decode(file_get_contents("php://input"), true);
 
 switch ($_GET["option"]) {
 
-    case "agregarSaldo":
-        $datos = $modelos->agregarSaldo($body['id_u'], $body['saldo_u']);
+    case "insertarTarea":
+        $datos = $modelos->insertarTarea($body['titulo'], $body['descripcion'], $body['organizacion'],
+        $body['horasActividad'], $body['vacantes'], $body['horasInicio'], $body['fecha'], $body['lugar']
+        ,$body['estado']);
         echo json_encode($datos);
         break;
-
     // Lo unico que hice..........
     case "login";
         $datos = $modelos->login($body['correo'], $body['pass']);

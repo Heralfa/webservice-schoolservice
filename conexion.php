@@ -10,10 +10,10 @@ class Conexion
     protected function connect()
     {
         try {
-            $NAMEDB = 'schoolServicedb';
-            $HOST = 'localhost';
-            $USER = 'root';
-            $PASSWORD = '';
+            $NAMEDB = 'heroku_40745ffd3d83426';
+            $HOST = 'us-cdbr-east-06.cleardb.net';
+            $USER = 'b40889023f6ba8';
+            $PASSWORD = '32d25c98';
             $conectar = $this->db = new PDO("mysql:host=$HOST;dbname=$NAMEDB", "$USER", "$PASSWORD");
             return $conectar;
         } catch (Exception $e) {

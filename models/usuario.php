@@ -28,6 +28,7 @@ class Usuario extends Conexion {
 
         if ($pass = $query['pass']) {
             $result['idUsuario'] = $query['idUsuario'];
+            $result['tipo'] = $query['tipo'];
 
         } else {
             $result['idUsuario'] = 0;        }

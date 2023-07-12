@@ -6,17 +6,10 @@ $body = json_decode(file_get_contents("php://input"), true);
 
 switch ($_GET["option"]) {
 
-    case "agregarSaldo":
-        $datos = $modelos->agregarSaldo($body['id_u'], $body['saldo_u']);
-        echo json_encode($datos);
-        break;
-
-    // Lo unico que hice..........
     case "login";
         $datos = $modelos->login($body['correo'], $body['pass']);
         echo json_encode($datos);
         break;
-
     case "agregarUsuario";
         $datos = $modelos->agregarUsuario($body['nombres'],$body['apellidoM'],$body['apellidoP'],$body['rfc'],$body['correo'],$body['pass'],$body['carrera']);
         echo json_encode($datos);

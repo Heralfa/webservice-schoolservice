@@ -41,6 +41,15 @@ class Actividades extends Conexion {
         $sql->execute();
         return $sql->fetchAll(PDO::FETCH_OBJ);
     }
+
+    function delete_Actividad_x_id($idActividad) {
+        $db = parent::connect();
+        parent::set_names();
+        $sql = "DELETE * FROM actividades WHERE idActividad = ?;";
+        $sql = $db->prepare($sql);
+        $sql->bindValue(1, $idActividad);
+        $sql->execute();
+    }
    
 
 }

@@ -41,14 +41,17 @@ class Actividades extends Conexion {
         $sql->execute();
         return $sql->fetchAll(PDO::FETCH_OBJ);
     }
-
-    function delete_Actividad_x_id($idActividad) {
+    public function editarActividad($idActividad, $titulo, $descripcion, $organizacion, 
+    $horasActividad,$vacantes,$horaInicio, $fecha, $lugar)
+    {
         $db = parent::connect();
         parent::set_names();
-        $sql = "DELETE * FROM actividades WHERE idActividad = ?;";
+        $sql = "UPDATE `actividades` SET `titulo`='$titulo',`descripcion`='$descripcion',
+        `organizacion`='$organizacion',`horasActividad`='$horasActividad',`vacantes`='$vacantes',
+        `horaInicio`='$horaInicio',`fecha`='$fecha',`lugar`='$lugar' WHERE  `idActividad` = $idActividad;";
         $sql = $db->prepare($sql);
-        $sql->bindValue(1, $idActividad);
-        $sql->execute();
+        $resultado['estatus'] = $sql->execute();
+        return $resultado;
     }
    
 

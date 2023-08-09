@@ -12,7 +12,7 @@ switch ($_GET["option"]) {
         break;
 
     case "agregarUsuario";
-        $datos = $modelos->agregarUsuario($body['nombres'],$body['apellidoM'],$body['apellidoP'],$body['rfc'],$body['correo'],$body['pass'],$body['carrera']);
+        $datos = $modelos->agregarUsuario($body['nombres'],$body['apellidoP'],$body['apellidoM'],$body['rfc'],$body['correo'],$body['pass'],$body['carrera']);
         echo json_encode($datos);
         break;
 
@@ -25,4 +25,9 @@ switch ($_GET["option"]) {
         $datos = $modelos->get_usuario_x_id($body['idUsuario']);
         echo json_encode($datos);
         break;
+
+    // case "listaAlumnos";
+    //     $datos = $modelos->get_listaAlumnos();
+    //     echo json_encode($datos);
+    //     break;
 }

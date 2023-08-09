@@ -2,10 +2,19 @@
 require_once("../conexion.php");
 $data = json_decode(file_get_contents("php://input"), true);
 
-class Actividades extends Conexion {
-    
-    function insertarTarea($titulo, $descripcion, $organizacion, $horaActividad,$vacantes,$horaInicio,
-    $fecha,$lugar) {
+class Actividades extends Conexion
+{
+
+    function insertarTarea(
+        $titulo,
+        $descripcion,
+        $organizacion,
+        $horaActividad,
+        $vacantes,
+        $horaInicio,
+        $fecha,
+        $lugar
+    ) {
         $db = parent::connect();
         parent::set_names();
         $sql = "INSERT INTO `usuarios`( `titulo`, `descripcion`, `organizacion`, `horasActividad`, `vacantes`, `horaInicio`, `fecha`, `lugar`, `estado`) VALUES (?,?,?,?,?,?,?,?,?,?)";
@@ -18,7 +27,7 @@ class Actividades extends Conexion {
         $sql->bindValue(6, $horaInicio);
         $sql->bindValue(7, $fecha);
         $sql->bindValue(8, $lugar);
-        
+
         $result['status'] = $sql->execute();
         return $result;
     }
@@ -34,16 +43,17 @@ class Actividades extends Conexion {
         foreach ($resultado as $d) {
             $Array[] = [
                 'idActividad' => (int)$d->idActividad, 'titulo' => $d->titulo,
-                'descripcion' => $d->descripcion,'organizacion' => $d->organizacion, 
-                'horasActividad' => (int)$d->horasActividad,'vacantes' => (int)$d->vacantes,
-                'horaInicio' => $d->horaInicio,'fecha' => $d->fecha,
+                'descripcion' => $d->descripcion, 'organizacion' => $d->organizacion,
+                'horasActividad' => (int)$d->horasActividad, 'vacantes' => (int)$d->vacantes,
+                'horaInicio' => $d->horaInicio, 'fecha' => $d->fecha,
                 'lugar' => $d->lugar
             ];
         }
         return $Array;
     }
- 
-    function get_usuario() {
+
+    function get_usuario()
+    {
         $db = parent::connect();
         parent::set_names();
         $sql = "SELECT * FROM usuarios;";
@@ -51,20 +61,17 @@ class Actividades extends Conexion {
         $sql->execute();
         return $sql->fetchAll(PDO::FETCH_OBJ);
     }
-    public function editarActividad($idActividad, $titulo, $descripcion, $organizacion, 
-    $horasActividad,$vacantes,$horaInicio, $fecha, $lugar)
-    {
+    public function editarActividad($idActividad,$titulo, $descripcion,$organizacion,$horasActividad, $vacantes,$horaInicio,$fecha,$lugar
+    ) {
         $db = parent::connect();
         parent::set_names();
-        $sql = "UPDATE `actividades` SET `titulo`='$titulo',`descripcion`='$descripcion',
-        `organizacion`='$organizacion',`horasActividad`='$horasActividad',`vacantes`='$vacantes',
-        `horaInicio`='$horaInicio',`fecha`='$fecha',`lugar`='$lugar' WHERE  `idActividad` = $idActividad;";
+        $sql = "UPDATE `actividades` SET `titulo`='$titulo',`descripcion`='$descripcion', `organizacion`='$organizacion',`horasActividad`='$horasActividad',`vacantes`='$vacantes',`horaInicio`='$horaInicio',`fecha`='$fecha',`lugar`='$lugar' WHERE  `idActividad` = $idActividad;";
         $sql = $db->prepare($sql);
         $resultado['estatus'] = $sql->execute();
         return $resultado;
-
     }
-    function get_actividad_x_id($idUsuario) {
+    function get_actividad_x_id($idUsuario)
+    {
         $db = parent::connect();
         parent::set_names();
         $sql = "SELECT * FROM usuarios WHERE idUsuario = ?;";
@@ -83,6 +90,4 @@ class Actividades extends Conexion {
         $resultado['estatus'] = $sql->execute();
         return $resultado;
     }
-   
-
 }

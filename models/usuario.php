@@ -31,7 +31,7 @@ class Usuario extends Conexion {
         return $result;
     }
 
-    public function agregarUsuario( $nombres, $apellidoP,$apellidoM, $rfc, $correo,$pass,$carrera) {
+    public function agregarUsuario( $nombres, $apellidoP, $apellidoM, $rfc, $correo,$pass,$carrera) {
         $link = parent::connect();
         parent::set_names();
         $passencrypt = password_hash($pass, PASSWORD_DEFAULT);
@@ -52,7 +52,7 @@ class Usuario extends Conexion {
     function get_usuario() {
         $db = parent::connect();
         parent::set_names();
-        $sql = "SELECT * FROM usuarios;";
+        $sql = "SELECT * FROM usuarios WHERE tipo = 1;";
         $sql = $db->prepare($sql);
         $sql->execute();
         return $sql->fetchAll(PDO::FETCH_OBJ);
@@ -67,6 +67,27 @@ class Usuario extends Conexion {
         $sql->execute();
         return $sql->fetchAll(PDO::FETCH_OBJ);
     }
+
+
+    // public function get_listaAlumnos()
+    // {
+    //     $db = parent::connect();
+    //     parent::set_names();
+    //     $sql = "SELECT * FROM usuarios WHERE tipo=1 ;";
+    //     $sql = $db->prepare($sql);
+    //     $sql->execute();
+    //     $resultado = $sql->fetchAll(PDO::FETCH_OBJ);
+    //     $Array = [];
+    //     foreach ($resultado as $d) {
+    //         $Array[] = [
+    //             'idUsuario' => (int)$d->idUsuario, 'nombres' => $d->nombres,
+    //             'apellidoP' => $d->apellidoP, 'apellidoM' => $d->apellidoM, 'salario' => (float)$d->salario,
+    //             'rfc' => $d->rfc, 'correo' => $d->correo,
+    //             'carrera' => (int)$d->carreras, , 'horas' => (int)$d->horas,
+    //         ];
+    //     }
+    //     return $Array;
+    // }
    
 
 }

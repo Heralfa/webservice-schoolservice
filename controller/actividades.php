@@ -27,4 +27,12 @@ switch ($_GET["option"]) {
         $body['horasActividad'],$body['vacantes'],$body['horaInicio'],$body['fecha'],$body['lugar']);
         echo json_encode($datos);
         break;
+    case "traerActividesProceso";
+        $datos = $modelos->getActividadesProceso();
+        echo json_encode($datos);
+        break;
+    case "traerActividesPendientes";
+        $datos = $modelos->getActividadesPendientes();
+        echo json_encode($datos);
+        break;
 }

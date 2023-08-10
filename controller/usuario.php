@@ -26,8 +26,9 @@ switch ($_GET["option"]) {
         echo json_encode($datos);
         break;
 
-    // case "listaAlumnos";
-    //     $datos = $modelos->get_listaAlumnos();
-    //     echo json_encode($datos);
-    //     break;
+    case "editarUsuario";
+        $datos = $modelos->editarUsuario($body['nombres'],$body['apellidoP'],$body['apellidoM'],$body['rfc'],$body['correo'],$body['pass'],$body['carrera']);
+        echo json_encode($datos);
+        break;
+
 }

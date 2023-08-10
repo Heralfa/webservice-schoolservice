@@ -69,13 +69,12 @@ class Usuario extends Conexion {
     }
 
     function editarUsuario($idUsuario,$nombres, $apellidoP, $apellidoM, $rfc, $correo,$pass,$carrera){
-        parent::set_names();
         $db = parent::connect();
-        $passencrypt = password_hash($pass, PASSWORD_DEFAULT);
         parent::set_names();
-        $sql = "UPDATE `actividades` SET `nombres`='$nombres',`apellidoP`='$apellidoP',
+        $passencrypt = password_hash($pass, PASSWORD_DEFAULT);
+        $sql = "UPDATE `usuarios` SET `nombres`='$nombres',`apellidoP`='$apellidoP',
         `apellidoM`='$apellidoM',`rfc`='$rfc',`correo`='$correo',
-        `pass`='$passencrypt',`carrera`='$carrera' WHERE  `idActividad` = $idUsuario;";
+        `pass`='$passencrypt',`carrera`='$carrera' WHERE  `idUsuario` = $idUsuario;";
         $sql = $db->prepare($sql);
         $resultado['estatus'] = $sql->execute();
         return $resultado;

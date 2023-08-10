@@ -88,11 +88,12 @@ class Actividades extends Conexion {
     {
         $db = parent::connect();
         parent::set_names();
-        $sql = "SELECT u.rfc , u.nombres, u.apellidoP, u.apellidoM , a.organizacion, a.lugar, a.fecha, a.horaInicio, a.horasActividad 
+        $sql = "SELECT u.rfc , u.nombres, u.apellidoP, u.apellidoM , a.organizacion, a.horasActividad, ua.evidencia
         FROM actividades AS a
         INNER JOIN usuarioactividad AS ua
         ON a.idActividad = ua.idActividad
-        INNER JOIN usuarios AS u ON ua.idUsuario= u.idUsuario;";
+        INNER JOIN usuarios AS u ON ua.idUsuario= u.idUsuario
+        WHERE ua.estado = 1;";
         $sql = $db->prepare($sql);
         $sql->execute();
         $resultado = $sql->fetchAll(PDO::FETCH_OBJ);
@@ -106,7 +107,8 @@ class Actividades extends Conexion {
         FROM actividades AS a
         INNER JOIN usuarioactividad AS ua
         ON a.idActividad = ua.idActividad
-        INNER JOIN usuarios AS u ON ua.idUsuario= u.idUsuario;";
+        INNER JOIN usuarios AS u ON ua.idUsuario= u.idUsuario
+        WHERE ua.estado = 2;";
         $sql = $db->prepare($sql);
         $sql->execute();
         $resultado = $sql->fetchAll(PDO::FETCH_OBJ);

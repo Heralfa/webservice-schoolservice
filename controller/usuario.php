@@ -27,7 +27,7 @@ switch ($_GET["option"]) {
         break;
 
     case "editarUsuario";
-        $datos = $modelos->editarUsuario($body['nombres'],$body['apellidoP'],$body['apellidoM'],$body['rfc'],$body['correo'],$body['pass'],$body['carrera']);
+        $datos = $modelos->editarUsuario($body['idUsuario'],$body['nombres'],$body['apellidoP'],$body['apellidoM'],$body['rfc'],$body['correo'],$body['pass'],$body['carrera']);
         echo json_encode($datos);
         break;
 

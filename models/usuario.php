@@ -68,11 +68,11 @@ class Usuario extends Conexion {
         return $sql->fetchAll(PDO::FETCH_OBJ);
     }
 
-    function editarUsuario($nombres, $apellidoP, $apellidoM, $rfc, $correo,$pass,$carrera){
+    function editarUsuario($idUsuario,$nombres, $apellidoP, $apellidoM, $rfc, $correo,$pass,$carrera){
         $conectar = parent::connect();
         parent::set_names();
         $passencrypt = password_hash($pass, PASSWORD_DEFAULT);
-        $sql = "UPDATE `usuarios` SET `nombres`= ?, `apellidoP`= ?, `apellidoM`= ?, `rfc`= ?, `correo`= ?, `pass`= ?, `carrera`= ? WHERE idUsuario = ?;";
+        $sql = "UPDATE `usuarios` SET `nombres`= ?, `apellidoP`= ?, `apellidoM`= ?, `rfc`= ?, `correo`= ?, `pass`= ?, `carrera`= ? WHERE `idUsuario` = ?;";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $nombres);
         $sql->bindValue(2, $apellidoP);
@@ -81,6 +81,7 @@ class Usuario extends Conexion {
         $sql->bindValue(5, $correo);
         $sql->bindValue(6, $passencrypt);
         $sql->bindValue(7, $carrera);
+        $sql->bindValue(7, $idUsuario);
         $resultado['estatus'] = $sql->execute();
         return $resultado;
     }

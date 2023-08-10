@@ -113,7 +113,4 @@ class Actividades extends Conexion {
         return $resultado;
     }
 
-
-   
-
 }

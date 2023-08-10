@@ -68,19 +68,15 @@ class Usuario extends Conexion {
         return $sql->fetchAll(PDO::FETCH_OBJ);
     }
 
-    function editarUsuario($nombres, $apellidoP, $apellidoM, $rfc, $correo,$pass,$carrera){
-        $conectar = parent::connect();
+    function editarUsuario($idUsuario,$nombres, $apellidoP, $apellidoM, $rfc, $correo,$pass,$carrera){
         parent::set_names();
+        $db = parent::connect();
         $passencrypt = password_hash($pass, PASSWORD_DEFAULT);
-        $sql = "UPDATE `usuarios` SET `nombres`= ?, `apellidoP`= ?, `apellidoM`= ?, `rfc`= ?, `correo`= ?, `pass`= ?, `carrera`= ? WHERE idUsuario = ?;";
-        $sql = $conectar->prepare($sql);
-        $sql->bindValue(1, $nombres);
-        $sql->bindValue(2, $apellidoP);
-        $sql->bindValue(3, $apellidoM);
-        $sql->bindValue(4, $rfc);
-        $sql->bindValue(5, $correo);
-        $sql->bindValue(6, $passencrypt);
-        $sql->bindValue(7, $carrera);
+        parent::set_names();
+        $sql = "UPDATE `actividades` SET `nombres`='$nombres',`apellidoP`='$apellidoP',
+        `apellidoM`='$apellidoM',`rfc`='$rfc',`correo`='$correo',
+        `pass`='$passencrypt',`carrera`='$carrera' WHERE  `idActividad` = $idUsuario;";
+        $sql = $db->prepare($sql);
         $resultado['estatus'] = $sql->execute();
         return $resultado;
     }

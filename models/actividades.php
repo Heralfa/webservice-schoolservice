@@ -8,7 +8,7 @@ class Actividades extends Conexion {
     $fecha,$lugar) {
         $db = parent::connect();
         parent::set_names();
-        $sql = "INSERT INTO `usuarios`( `titulo`, `descripcion`, `organizacion`, `horasActividad`, `vacantes`, `horaInicio`, `fecha`, `lugar`, `estado`) VALUES (?,?,?,?,?,?,?,?,?,?)";
+        $sql = "INSERT INTO `actividades`( `titulo`, `descripcion`, `organizacion`, `horasActividad`, `vacantes`, `horaInicio`, `fecha`, `lugar`) VALUES (?,?,?,?,?,?,?,?)";
         $sql = $db->prepare($sql);
         $sql->bindValue(1, $titulo);
         $sql->bindValue(2, $descripcion);
@@ -26,7 +26,7 @@ class Actividades extends Conexion {
     {
         $db = parent::connect();
         parent::set_names();
-        $sql = "SELECT * FROM actividades;";
+        $sql = "SELECT * FROM actividades WHERE vacantes > 0" ;
         $sql = $db->prepare($sql);
         $sql->execute();
         $resultado = $sql->fetchAll(PDO::FETCH_OBJ);

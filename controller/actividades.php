@@ -22,6 +22,7 @@ switch ($_GET["option"]) {
         $datos = $modelos->get_actividad_x_id($body['idActividad']);
         echo json_encode($datos);
         break;
+        
     case "editarActividad";
         $datos = $modelos->editarActividad($body['idActividad'],$body['titulo'], $body['descripcion'],$body['organizacion'],
         $body['horasActividad'],$body['vacantes'],$body['horaInicio'],$body['fecha'],$body['lugar']);

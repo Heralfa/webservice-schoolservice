@@ -65,12 +65,12 @@ class Actividades extends Conexion {
 
     }
 
-    function get_actividad_x_id($idUsuario) {
+    function get_actividad_x_id($idActividad) {
         $db = parent::connect();
         parent::set_names();
-        $sql = "SELECT * FROM usuarios WHERE idUsuario = ?;";
+        $sql = "SELECT * FROM actividades WHERE idActividad = ?;";
         $sql = $db->prepare($sql);
-        $sql->bindValue(1, $idUsuario);
+        $sql->bindValue(1, $idActividad);
         $sql->execute();
         return $sql->fetchAll(PDO::FETCH_OBJ);
     }

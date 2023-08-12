@@ -38,6 +38,7 @@ switch ($_GET["option"]) {
         $datos = $modelos->getActividadesPendientes();
         echo json_encode($datos);
         break;
+        
     case "traerActividesTerminada";
         $datos = $modelos->getActividadesTerminada();
         echo json_encode($datos);

@@ -104,7 +104,7 @@ class Actividades extends Conexion {
     {
         $db = parent::connect();
         parent::set_names();
-        $sql = "SELECT u.rfc , u.nombres, u.apellidoP, u.apellidoM , a.organizacion, a.horasActividad, ua.evidencia
+        $sql = "SELECT u.rfc , u.nombres, u.apellidoP, u.apellidoM , a.titulo, a.organizacion, a.horasActividad, ua.evidencia
         FROM actividades AS a
         INNER JOIN usuarioactividad AS ua
         ON a.idActividad = ua.idActividad

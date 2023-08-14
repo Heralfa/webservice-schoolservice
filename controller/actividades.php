@@ -43,4 +43,9 @@ switch ($_GET["option"]) {
         $datos = $modelos->getActividadesTerminada();
         echo json_encode($datos);
         break;
+
+    case "editarEstado";
+        $datos = $modelos->editarEstado($body['idUsuarioActividad'],$body['estado']);
+        echo json_encode($datos);
+        break;
 }

@@ -79,6 +79,14 @@ class Usuario extends Conexion {
         $resultado['estatus'] = $sql->execute();
         return $resultado;
     }
+    function editarhoras($idUsuario,$horas){
+        $db = parent::connect();
+        parent::set_names();
+        $sql = "UPDATE `usuarios` SET `horas`=$horas WHERE  `idUsuario` = $idUsuario;";
+        $sql = $db->prepare($sql);
+        $resultado['estatus'] = $sql->execute();
+        return $resultado;
+    }
 
 
 

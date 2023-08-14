@@ -30,5 +30,10 @@ switch ($_GET["option"]) {
         $datos = $modelos->editarUsuario($body['idUsuario'],$body['nombres'],$body['apellidoP'],$body['apellidoM'],$body['rfc'],$body['correo'],$body['pass'],$body['carrera']);
         echo json_encode($datos);
         break;
+        
+    case "editarHoras";
+        $datos = $modelos->editarhoras($body['idUsuario'],$body['horas']);
+        echo json_encode($datos);
+        break;
 
 }

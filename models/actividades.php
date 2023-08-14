@@ -104,7 +104,7 @@ class Actividades extends Conexion {
     {
         $db = parent::connect();
         parent::set_names();
-        $sql = "SELECT u.rfc , u.nombres, u.apellidoP, u.apellidoM , a.titulo, a.organizacion, a.horasActividad, ua.evidencia
+        $sql = "SELECT ua.idUsuarioActividad, ua.estado ,u.idUsuario, u.rfc , u.nombres, u.apellidoP, u.apellidoM , a.titulo, a.organizacion, a.horasActividad, ua.evidencia
         FROM actividades AS a
         INNER JOIN usuarioactividad AS ua
         ON a.idActividad = ua.idActividad
@@ -129,6 +129,14 @@ class Actividades extends Conexion {
         $sql = $db->prepare($sql);
         $sql->execute();
         $resultado = $sql->fetchAll(PDO::FETCH_OBJ);
+        return $resultado;
+    }
+    function editarEstado($idUsuarioActividad,$estado){
+        $db = parent::connect();
+        parent::set_names();
+        $sql = "UPDATE `usuarioactividad` SET `estado`=$estado + 1  WHERE  `idUsuarioActividad` = $idUsuarioActividad;";
+        $sql = $db->prepare($sql);
+        $resultado['estatus'] = $sql->execute();
         return $resultado;
     }
 

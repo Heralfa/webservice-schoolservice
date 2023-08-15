@@ -48,14 +48,19 @@ switch ($_GET["option"]) {
         $datos = $modelos->editarEstado($body['idUsuarioActividad'],$body['estado']);
         echo json_encode($datos);
         break;
+
+        // ------------------------------------------------------------------- Alumnos -------------------------------------------------
+
     case "traerActividadProcesoxid";
         $datos = $modelos->getActividadesProcesoxid($body['idUsuario']);
         echo json_encode($datos);
         break;
+
     case "traerActividadPendientesxid";
         $datos = $modelos->getActividadesPendientesxid($body['idUsuario']);
         echo json_encode($datos);
         break;
+
     case "traerActividadTerminadaxid";
         $datos = $modelos->getActividadesTerminadaxid($body['idUsuario']);
         echo json_encode($datos);

@@ -22,6 +22,7 @@ class Actividades extends Conexion {
         $result['status'] = $sql->execute();
         return $result;
     }
+
     public function get_tareas()
     {
         $db = parent::connect();
@@ -51,6 +52,7 @@ class Actividades extends Conexion {
         $sql->execute();
         return $sql->fetchAll(PDO::FETCH_OBJ);
     }
+    
     public function editarActividad($idActividad, $titulo, $descripcion, $organizacion, 
     $horasActividad,$vacantes,$horaInicio, $fecha, $lugar)
     {
@@ -74,6 +76,7 @@ class Actividades extends Conexion {
         $sql->execute();
         return $sql->fetchAll(PDO::FETCH_OBJ);
     }
+
     public function deleteActividad($idActividad)
     {
         $db = parent::connect();
@@ -84,6 +87,7 @@ class Actividades extends Conexion {
         $resultado['estatus'] = $sql->execute();
         return $resultado;
     }
+
     public function getActividadesProceso()
     {
         $db = parent::connect();
@@ -100,6 +104,7 @@ class Actividades extends Conexion {
         $resultado = $sql->fetchAll(PDO::FETCH_OBJ);
         return $resultado;
     }
+
     public function getActividadesPendientes()
     {
         $db = parent::connect();
@@ -115,6 +120,7 @@ class Actividades extends Conexion {
         $resultado = $sql->fetchAll(PDO::FETCH_OBJ);
         return $resultado;
     }
+
     public function getActividadesTerminada()
     {
         $db = parent::connect();
@@ -131,6 +137,7 @@ class Actividades extends Conexion {
         $resultado = $sql->fetchAll(PDO::FETCH_OBJ);
         return $resultado;
     }
+
     function editarEstado($idUsuarioActividad,$estado){
         $db = parent::connect();
         parent::set_names();
@@ -139,6 +146,9 @@ class Actividades extends Conexion {
         $resultado['estatus'] = $sql->execute();
         return $resultado;
     }
+
+    // ------------------------------------------------------------------------- Servicios del alumno ----------------------------------------------------------
+
     public function getActividadesProcesoxid($idUsuario)
     {
         $db = parent::connect();
@@ -155,11 +165,12 @@ class Actividades extends Conexion {
         $resultado = $sql->fetchAll(PDO::FETCH_OBJ);
         return $resultado;
     }
+
     public function getActividadesPendientesxid($idUsuario)
     {
         $db = parent::connect();
         parent::set_names();
-        $sql = "SELECT ua.idUsuarioActividad,u.idUsuario, a.titulo, a.organizacion,a.fecha, a.horasActividad, ua.evidencia
+        $sql = "SELECT ua.idUsuarioActividad,u.idUsuario, u.nombres, u.apellidoP, u.apellidoM, u.rfc, a.titulo, a.organizacion,a.fecha, a.horasActividad, ua.evidencia
         FROM actividades AS a
         INNER JOIN usuarioactividad AS ua
         ON a.idActividad = ua.idActividad
@@ -170,6 +181,7 @@ class Actividades extends Conexion {
         $resultado = $sql->fetchAll(PDO::FETCH_OBJ);
         return $resultado;
     }
+    
     public function getActividadesTerminadaxid($idUsuario)
     {
         $db = parent::connect();

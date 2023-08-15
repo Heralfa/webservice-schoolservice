@@ -139,5 +139,51 @@ class Actividades extends Conexion {
         $resultado['estatus'] = $sql->execute();
         return $resultado;
     }
+    public function getActividadesProcesoxid($idUsuario)
+    {
+        $db = parent::connect();
+        parent::set_names();
+        $sql = "SELECT u.idUsuario, a.titulo,a.organizacion,a.lugar,a.fecha,
+		time_format(a.horaInicio, '%h:%i %p') AS horaInicio ,a.horasActividad
+        FROM actividades AS a
+        INNER JOIN usuarioactividad AS ua
+        ON a.idActividad = ua.idActividad
+        INNER JOIN usuarios AS u ON ua.idUsuario= u.idUsuario
+        WHERE ua.estado = 1 AND u.idUsuario = $idUsuario";
+        $sql = $db->prepare($sql);
+        $sql->execute();
+        $resultado = $sql->fetchAll(PDO::FETCH_OBJ);
+        return $resultado;
+    }
+    public function getActividadesPendientesxid($idUsuario)
+    {
+        $db = parent::connect();
+        parent::set_names();
+        $sql = "SELECT ua.idUsuarioActividad,u.idUsuario, a.titulo, a.organizacion,a.fecha, a.horasActividad, ua.evidencia
+        FROM actividades AS a
+        INNER JOIN usuarioactividad AS ua
+        ON a.idActividad = ua.idActividad
+        INNER JOIN usuarios AS u ON ua.idUsuario= u.idUsuario
+        WHERE ua.estado = 2 AND u.idUsuario = $idUsuario ";
+        $sql = $db->prepare($sql);
+        $sql->execute();
+        $resultado = $sql->fetchAll(PDO::FETCH_OBJ);
+        return $resultado;
+    }
+    public function getActividadesTerminadaxid($idUsuario)
+    {
+        $db = parent::connect();
+        parent::set_names();
+        $sql = "SELECT ua.idUsuarioActividad,u.idUsuario, a.titulo, a.organizacion,a.fecha, a.horasActividad, ua.evidencia
+        FROM actividades AS a
+        INNER JOIN usuarioactividad AS ua
+        ON a.idActividad = ua.idActividad
+        INNER JOIN usuarios AS u ON ua.idUsuario= u.idUsuario
+        WHERE ua.estado = 3 AND u.idUsuario = $idUsuario ";
+        $sql = $db->prepare($sql);
+        $sql->execute();
+        $resultado = $sql->fetchAll(PDO::FETCH_OBJ);
+        return $resultado;
+    }
 
 }

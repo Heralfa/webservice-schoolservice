@@ -65,4 +65,9 @@ switch ($_GET["option"]) {
         $datos = $modelos->getActividadesTerminadaxid($body['idUsuario']);
         echo json_encode($datos);
         break;
+
+    case "subirEvidencias";
+        $datos = $modelos->subirEvidencia($body['idUsuarioActividad'],$body['evidencia'],$body['estado']);
+        echo json_encode($datos);
+        break;
 }

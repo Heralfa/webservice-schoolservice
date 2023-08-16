@@ -153,7 +153,7 @@ class Actividades extends Conexion {
     {
         $db = parent::connect();
         parent::set_names();
-        $sql = "SELECT u.idUsuario,a.titulo,a.organizacion,a.lugar,a.fecha,a.vacantes,a.descripcion,
+        $sql = "SELECT ua.idUsuarioActividad, ua.estado, u.idUsuario,a.titulo,a.organizacion,a.lugar,a.fecha,a.vacantes,a.descripcion,
 		time_format(a.horaInicio, '%h:%i %p') AS horaInicio ,a.horasActividad
         FROM actividades AS a
         INNER JOIN usuarioactividad AS ua
@@ -170,7 +170,7 @@ class Actividades extends Conexion {
     {
         $db = parent::connect();
         parent::set_names();
-        $sql = "SELECT ua.idUsuarioActividad,u.idUsuario, u.nombres, u.apellidoP, u.apellidoM, u.rfc, a.titulo, a.organizacion,a.fecha, a.horasActividad, ua.evidencia
+        $sql = "SELECT ua.idUsuarioActividad, u.idUsuario, u.nombres, u.apellidoP, u.apellidoM, u.rfc, a.titulo, a.organizacion,a.fecha, a.horasActividad, ua.evidencia
         FROM actividades AS a
         INNER JOIN usuarioactividad AS ua
         ON a.idActividad = ua.idActividad
@@ -197,6 +197,15 @@ class Actividades extends Conexion {
         $sql = $db->prepare($sql);
         $sql->execute();
         $resultado = $sql->fetchAll(PDO::FETCH_OBJ);
+        return $resultado;
+    }
+
+    function subirEvidencia($idUsuarioActividad,$evidencia,$estado){
+        $db = parent::connect();
+        parent::set_names();
+        $sql = "UPDATE `usuarioactividad` SET `evidencia`='$evidencia', `estado`=$estado + 1  WHERE  `idUsuarioActividad` = $idUsuarioActividad;";
+        $sql = $db->prepare($sql);
+        $resultado['estatus'] = $sql->execute();
         return $resultado;
     }
 

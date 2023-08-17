@@ -68,6 +68,8 @@ switch ($_GET["option"]) {
 
     case "comprobar";
         $datos = $modelos->comprobar($body['idUsuario'],$body['idActividad']);
+    case "subirEvidencias";
+        $datos = $modelos->subirEvidencia($body['idUsuarioActividad'],$body['evidencia'],$body['estado']);
         echo json_encode($datos);
         break;
 }

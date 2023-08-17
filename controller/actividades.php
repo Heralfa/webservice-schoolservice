@@ -65,4 +65,9 @@ switch ($_GET["option"]) {
         $datos = $modelos->getActividadesTerminadaxid($body['idUsuario']);
         echo json_encode($datos);
         break;
+
+    case "comprobar";
+        $datos = $modelos->comprobar($body['idUsuario'],$body['idActividad']);
+        echo json_encode($datos);
+        break;
 }

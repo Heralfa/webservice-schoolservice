@@ -199,5 +199,14 @@ class Actividades extends Conexion {
         $resultado = $sql->fetchAll(PDO::FETCH_OBJ);
         return $resultado;
     }
+    function comprobar($idUsuario, $idActividad) {
+        $db = parent::connect();
+        parent::set_names();
+        $sql = "SELECT * FROM usuarioactividad WHERE idUsuario = $idUsuario AND idActividad = $idActividad ;";
+        $sql = $db->prepare($sql);
+        $sql->execute();
+        return $sql->fetchAll(PDO::FETCH_OBJ);
+    }
+
 
 }

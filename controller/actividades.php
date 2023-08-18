@@ -72,4 +72,14 @@ switch ($_GET["option"]) {
         $datos = $modelos->subirEvidencia($body['idUsuarioActividad'],$body['evidencia'],$body['estado']);
         echo json_encode($datos);
         break;
+
+    case "postularse";
+        $datos = $modelos->postularte($body['idUsuario'],$body['idActividad']);
+        echo json_encode($datos);
+        break;
+
+    case "editarVacantes";
+        $datos = $modelos->editarvacantes($body['idActividad'],$body['vacantes']);
+        echo json_encode($datos);
+        break;
 }

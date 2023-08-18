@@ -199,6 +199,7 @@ class Actividades extends Conexion {
         $resultado = $sql->fetchAll(PDO::FETCH_OBJ);
         return $resultado;
     }
+
     function comprobar($idUsuario, $idActividad) {
         $db = parent::connect();
         parent::set_names();
@@ -213,6 +214,28 @@ class Actividades extends Conexion {
         $db = parent::connect();
         parent::set_names();
         $sql = "UPDATE `usuarioactividad` SET `evidencia`='$evidencia', `estado`=$estado + 1  WHERE  `idUsuarioActividad` = $idUsuarioActividad;";
+        $sql = $db->prepare($sql);
+        $resultado['estatus'] = $sql->execute();
+        return $resultado;
+    }
+
+    function postularte( $idUsuario, $idActividad){
+        $db = parent::connect();
+        parent::set_names();
+        $sql = "INSERT INTO `usuarioactividad`( `idUsuario`, `idActividad`) VALUES (?,?)";
+        $sql = $db->prepare($sql);
+        $sql->bindValue(1, $idUsuario);
+        $sql->bindValue(2, $idActividad);
+      
+        
+        $result['status'] = $sql->execute();
+        return $result;
+
+    }
+    function editarvacantes($idActividad,$vacantes){
+        $db = parent::connect();
+        parent::set_names();
+        $sql = "UPDATE `actividades` SET `vacantes`=$vacantes - 1  WHERE  `idActividad` = $idActividad;";
         $sql = $db->prepare($sql);
         $resultado['estatus'] = $sql->execute();
         return $resultado;

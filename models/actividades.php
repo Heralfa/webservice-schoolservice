@@ -81,7 +81,7 @@ class Actividades extends Conexion {
     {
         $db = parent::connect();
         parent::set_names();
-        $sql = "DELETE FROM `actividades` WHERE idActividades = ?;";
+        $sql = "DELETE FROM `actividades` WHERE idActividad = ?;";
         $sql = $db->prepare($sql);
         $sql->bindValue(1, $idActividad);
         $resultado['estatus'] = $sql->execute();
@@ -146,6 +146,7 @@ class Actividades extends Conexion {
         $resultado['estatus'] = $sql->execute();
         return $resultado;
     }
+
 
     // ------------------------------------------------------------------------- Servicios del alumno ----------------------------------------------------------
 

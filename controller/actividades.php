@@ -49,6 +49,11 @@ switch ($_GET["option"]) {
         echo json_encode($datos);
         break;
 
+    case "eliminarActividad";
+        $datos = $modelos->deleteActividad($body['idActividad']);
+        echo json_encode($datos);
+        break;
+
         // ------------------------------------------------------------------- Alumnos -------------------------------------------------
 
     case "traerActividadProcesoxid";

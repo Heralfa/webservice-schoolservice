@@ -12,7 +12,6 @@ class Usuario extends Conexion {
         $sql->bindValue(1, $correo);
         $sql->execute();
         $query = $sql->fetch();
-        // Si encuentra al usuario y la contraseña coincide entonces retorna los datos
         if ($query && password_verify($pass, $query['pass'])) {
             $result['idUsuario'] = $query['idUsuario'];
             $result['tipo'] = $query['tipo'];
@@ -20,13 +19,6 @@ class Usuario extends Conexion {
         } else {
             $result['idUsuario'] = 0;
         }
-
-        if ($pass = $query['pass']) {
-                    $result['idUsuario'] = $query['idUsuario'];
-                    $result['tipo'] = $query['tipo'];
-        
-                } else {
-                    $result['idUsuario'] = 0;  }
 
         return $result;
     }
@@ -44,9 +36,14 @@ class Usuario extends Conexion {
         $sql->bindValue(5, $correo);
         $sql->bindValue(6, $passencrypt);
         $sql->bindValue(7, $carrera);
-    
-        $result['status'] = $sql->execute();
-        return $result;
+
+        try {
+            $result['status'] = $sql->execute();        
+        } catch (PDOException $e) {
+            $result['code'] = $e->getCode();
+        } finally {
+            return $result;
+        }
     }
 
     function get_usuario() {

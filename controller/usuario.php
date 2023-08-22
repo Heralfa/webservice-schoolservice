@@ -35,5 +35,6 @@ switch ($_GET["option"]) {
         $datos = $modelos->editarhoras($body['idUsuario'],$body['horas']);
         echo json_encode($datos);
         break;
+   
 
 }

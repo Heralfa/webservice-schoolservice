@@ -84,8 +84,14 @@ class Actividades extends Conexion {
         $sql = "DELETE FROM `actividades` WHERE idActividad = ?;";
         $sql = $db->prepare($sql);
         $sql->bindValue(1, $idActividad);
-        $resultado['estatus'] = $sql->execute();
-        return $resultado;
+
+        try {
+            $result['status'] = $sql->execute();        
+        } catch (PDOException $e) {
+            $result['code'] = $e->getCode();
+        } finally {
+            return $result;
+        }
     }
 
     public function getActividadesProceso()

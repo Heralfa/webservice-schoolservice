@@ -98,7 +98,7 @@ class Actividades extends Conexion {
     {
         $db = parent::connect();
         parent::set_names();
-        $sql = "SELECT u.rfc , u.nombres, u.apellidoP, u.apellidoM  ,a.organizacion,a.lugar,a.fecha,
+        $sql = "SELECT u.rfc , u.nombres, u.apellidoP, u.apellidoM, a.titulo, a.organizacion,a.lugar,a.fecha,
 		time_format(a.horaInicio, '%h:%i %p') AS horaInicio ,a.horasActividad
         FROM actividades AS a
         INNER JOIN usuarioactividad AS ua
